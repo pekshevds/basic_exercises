@@ -1,9 +1,19 @@
+import collections
+
 # Задание 1
 # Дан список учеников, нужно посчитать количество повторений каждого имени ученика
 # Пример вывода:
 # Вася: 1
 # Маша: 2
 # Петя: 2
+
+def get_student_repetitions(students):
+    
+    counter = collections.Counter()
+    for student in students:
+        counter[student['first_name']] += 1
+    return counter
+
 
 students = [
     {'first_name': 'Вася'},
@@ -12,7 +22,11 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+
+counter = get_student_repetitions(students)
+sorted_students = sorted(counter)
+for key in sorted_students:
+    print(key, ': ', counter[key])
 
 
 # Задание 2
@@ -26,7 +40,11 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+counter = get_student_repetitions(students)
+common_students = counter.most_common(1)
+for key in common_students:
+    print(f"Самое частое имя среди учеников: {key[0]}")
 
 
 # Задание 3
@@ -51,7 +69,12 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+
+for students in school_students:
+    counter = get_student_repetitions(students)
+    common_students = counter.most_common(1)
+    for key in common_students:
+        print(f"Самое частое имя среди учеников: {key[0]}")
 
 
 # Задание 4
@@ -72,7 +95,18 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+for this_Class in school:
+    
+    girls = 0; boys = 0
+    for student in this_Class['students']:
+        
+        if is_male[student['first_name']]:
+            boys += 1
+        else:
+            girls += 1
+
+    print(f"Класс {this_Class['class']}: девочки {girls}, мальчики {boys}")
 
 
 # Задание 5
@@ -91,5 +125,16 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+
+for this_Class in school:
+    
+    girls = 0; boys = 0
+    for student in this_Class['students']:
+        
+        if is_male[student['first_name']]:
+            boys += 1
+        else:
+            girls += 1
+    
+    print(f"Больше всего {'мальчиков' if boys>girls else 'девочек'} в классе {this_Class['class']}")
 
