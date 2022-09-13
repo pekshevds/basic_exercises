@@ -32,6 +32,12 @@ for word in sentence.split(' '):
 sentence = 'Мы приехали в гости'
 words = sentence.split(' ')
 counter = 0
+
 for word in words:
     counter += len(word)
-print(int(counter/len(words)))
+
+avg = 0
+if len(words) > 0:
+    avg = counter/len(words)
+
+print(int(avg))

@@ -7,14 +7,6 @@ import collections
 # Маша: 2
 # Петя: 2
 
-def get_student_repetitions(students):
-    
-    counter = collections.Counter()
-    for student in students:
-        counter[student['first_name']] += 1
-    return counter
-
-
 students = [
     {'first_name': 'Вася'},
     {'first_name': 'Петя'},
@@ -23,8 +15,8 @@ students = [
     {'first_name': 'Петя'},
 ]
 
-counter = get_student_repetitions(students)
-sorted_students = sorted(counter)
+counter = collections.Counter([student['first_name'] for student in students])
+sorted_students = sorted(counter, key=lambda item: item[1])
 for key in sorted_students:
     print(key, ': ', counter[key])
 
@@ -41,7 +33,7 @@ students = [
     {'first_name': 'Оля'},
 ]
 
-counter = get_student_repetitions(students)
+counter = collections.Counter([student['first_name'] for student in students])
 common_students = counter.most_common(1)
 for key in common_students:
     print(f"Самое частое имя среди учеников: {key[0]}")
@@ -71,7 +63,7 @@ school_students = [
 ]
 
 for students in school_students:
-    counter = get_student_repetitions(students)
+    counter = collections.Counter([student['first_name'] for student in students])
     common_students = counter.most_common(1)
     for key in common_students:
         print(f"Самое частое имя среди учеников: {key[0]}")
@@ -96,17 +88,18 @@ is_male = {
     'Даша': False,
 }
 
-for this_Class in school:
+for current_class in school:
     
-    girls = 0; boys = 0
-    for student in this_Class['students']:
+    girls = 0
+    boys = 0
+    for student in current_class['students']:
         
         if is_male[student['first_name']]:
             boys += 1
         else:
             girls += 1
 
-    print(f"Класс {this_Class['class']}: девочки {girls}, мальчики {boys}")
+    print(f"Класс {current_class['class']}: девочки {girls}, мальчики {boys}")
 
 
 # Задание 5
@@ -126,15 +119,16 @@ is_male = {
     'Миша': True,
 }
 
-for this_Class in school:
+for current_class in school:
     
-    girls = 0; boys = 0
-    for student in this_Class['students']:
+    girls = 0
+    boys = 0
+    for student in current_class['students']:
         
         if is_male[student['first_name']]:
             boys += 1
         else:
             girls += 1
     
-    print(f"Больше всего {'мальчиков' if boys>girls else 'девочек'} в классе {this_Class['class']}")
+    print(f"Больше всего {'мальчиков' if boys>girls else 'девочек'} в классе {current_class['class']}")
 
